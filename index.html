@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Anicoke - Редактор мемов</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎮 Club Anicoke - Редактор мемов</h1>
+        <p class="subtitle">Создавай мемы и посты для группы в едином стиле</p>
+
+        <div class="editor-wrapper">
+            <!-- Левая панель -->
+            <div class="panel">
+                <button class="btn btn-primary" id="randomMemeBtn">🎲 Случайный мем</button>
+
+                <h3>📋 Шаблоны постов</h3>
+                <div class="export-options">
+                    <button class="btn btn-secondary" id="tplAnnounce">📢 Анонс</button>
+                    <button class="btn btn-secondary" id="tplPoll">📊 Опрос</button>
+                </div>
+
+                <h3>🖼️ Рамки и лейауты</h3>
+                <div class="layouts-grid" id="layoutsGrid"></div>
+
+                <div id="sectionUploads"></div>
+
+                <h3>🎭 Персонажи</h3>
+                <div class="stickers-grid" id="stickersGrid"></div>
+
+                <div class="sticker-size-control">
+                    <label>Размер стикера: <span class="range-value" id="stickerSizeValue">150</span>px</label>
+                    <input type="range" id="stickerSize" min="50" max="400" value="150">
+                </div>
+
+                <h3>🌸 Фоны</h3>
+                <div class="backgrounds-grid" id="backgroundsGrid"></div>
+
+                <h3>📝 Текст</h3>
+                <div class="form-group">
+                    <label>Текст:</label>
+                    <input type="text" id="textInput" placeholder="Введи текст...">
+                </div>
+
+                <div class="form-group">
+                    <label>Шрифт:</label>
+                    <select id="fontSelect">
+                        <option value="AnicokeCustom, Arial">🎀 Шрифт группы</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Impact">Impact (мемы)</option>
+                        <option value="Comic Sans MS">Comic Sans</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Размер: <span class="range-value" id="fontSizeValue">40</span>px</label>
+                    <input type="range" id="fontSize" min="10" max="150" value="40">
+                </div>
+
+                <div class="form-group">
+                    <label>Цвет текста:</label>
+                    <input type="color" id="textColor" value="#ffffff">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="gradientText">
+                    <label for="gradientText">🌈 Градиент</label>
+                </div>
+
+                <div class="form-group" id="gradientColors" style="display: none;">
+                    <label>Градиент — цвет начала:</label>
+                    <input type="color" id="gradientFrom" value="#ff6b9d">
+                    <label>Градиент — цвет конца:</label>
+                    <input type="color" id="gradientTo" value="#6bbaff">
+                </div>
+
+                <div class="form-group">
+                    <label>Цвет обводки:</label>
+                    <input type="color" id="strokeColor" value="#000000">
+                </div>
+
+                <div class="form-group">
+                    <label>Толщина обводки: <span class="range-value" id="strokeWidthValue">3</span>px</label>
+                    <input type="range" id="strokeWidth" min="0" max="10" value="3">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="boldText" checked>
+                    <label for="boldText">Жирный</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="italicText">
+                    <label for="italicText">Курсив</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="shadowText" checked>
+                    <label for="shadowText">Тень</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="neonText">
+                    <label for="neonText">✨ Неоновая обводка</label>
+                </div>
+
+                <button class="btn btn-primary" id="addTextBtn">➕ Добавить текст</button>
+
+                <h3>➡️ Фигуры</h3>
+                <div class="form-group">
+                    <label>Тип фигуры:</label>
+                    <select id="shapeType">
+                        <option value="arrow">→ Стрелка</option>
+                        <option value="rect">⬛ Прямоугольник</option>
+                        <option value="star">⭐ Звезда</option>
+                        <option value="circle">⚪ Круг</option>
+                        <option value="line">— Линия</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Цвет фигуры:</label>
+                    <input type="color" id="shapeColor" value="#ff6b9d">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="shapeFilled" checked>
+                    <label for="shapeFilled">Залитая (иначе только контур)</label>
+                </div>
+                <button class="btn btn-primary" id="addShapeBtn">➕ Добавить фигуру</button>
+
+                <h3>💬 Облачка реплик</h3>
+                <div class="form-group">
+                    <label>Текст реплики:</label>
+                    <input type="text" id="bubbleText" placeholder="Что говорит персонаж?..">
+                </div>
+                <div class="form-group">
+                    <label>Хвостик:</label>
+                    <select id="tailDirection">
+                        <option value="down">Вниз</option>
+                        <option value="down-left">Вниз-влево</option>
+                        <option value="down-right">Вниз-вправо</option>
+                        <option value="up">Вверх</option>
+                        <option value="none">Без хвоста</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Цвет облачка:</label>
+                    <input type="color" id="bubbleColor" value="#ffffff">
+                </div>
+                <div class="form-group">
+                    <label>Цвет текста в облачке:</label>
+                    <input type="color" id="bubbleTextColor" value="#000000">
+                </div>
+                <button class="btn btn-primary" id="addBubbleBtn">💬 Добавить облачко</button>
+
+                <h3>🗂️ Слои</h3>
+                <div class="text-layers" id="textLayers"></div>
+
+                <h3>🏷️ Ватермарка</h3>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="watermarkEnabled">
+                    <label for="watermarkEnabled">Логотип группы на постах</label>
+                </div>
+                <div class="form-group">
+                    <label>Позиция:</label>
+                    <select id="watermarkPosition">
+                        <option value="br">Снизу справа</option>
+                        <option value="bl">Снизу слева</option>
+                        <option value="tr">Сверху справа</option>
+                        <option value="tl">Сверху слева</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Размер: <span id="watermarkSizeValue" class="range-value">120</span>px</label>
+                    <input type="range" id="watermarkSize" min="40" max="300" value="120">
+                </div>
+                <div class="form-group">
+                    <label>Прозрачность: <span id="watermarkOpacityValue" class="range-value">80</span>%</label>
+                    <input type="range" id="watermarkOpacity" min="10" max="100" value="80">
+                </div>
+                <div class="form-group">
+                    <label>Свой логотип (PNG с прозрачностью):</label>
+                    <input type="file" id="watermarkFile" accept="image/*">
+                </div>
+
+                <h3>📐 Формат</h3>
+                <div class="form-group">
+                    <label>Пропорции холста:</label>
+                    <select id="canvasPreset">
+                        <option value="800x800">1:1 — пост VK (800×800)</option>
+                        <option value="1280x720">16:9 — обложка/YouTube (1280×720)</option>
+                        <option value="800x1000">4:5 — лента (800×1000)</option>
+                        <option value="720x1280">9:16 — сторис (720×1280)</option>
+                    </select>
+                </div>
+
+                <h3>💾 Экспорт</h3>
+                <div class="export-options">
+                    <button class="btn btn-success" id="downloadPng">PNG</button>
+                    <button class="btn btn-secondary" id="downloadJpg">JPG</button>
+                    <button class="btn btn-secondary" id="downloadWebp">WebP</button>
+                </div>
+
+                <button class="btn btn-primary" id="copyToClipboard" style="margin-bottom: 10px;">📋 Копировать в
+                    буфер</button>
+                <button class="btn btn-danger" id="clearAll">🗑️ Очистить всё</button>
+                <div class="save-status" id="saveStatus">💾 Автосохранение включено</div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="canvas-container">
+                <canvas id="canvas" width="800" height="800"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/characters.js"></script>
+    <script src="js/backgrounds.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/templates.js"></script>
+</body>
+
+</html>
