@@ -221,6 +221,14 @@ function initBackgrounds() {
     });
 }
 
+// ⬇️ ВОТ ЭТА ФУНКЦИЯ — вставь её
+function selectBackground(key) {
+    currentBackground = key;
+    pushHistory();
+    syncUI();
+    render();
+}
+
 // === 2.5. ВАТЕРМАРКА ===
 function initWatermark() {
     // Встроенный логотип группы (работает без файлов)
